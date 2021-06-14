@@ -1,1 +1,13 @@
 
+Notes:
+Alignment and variant calling based on GATK best practices (McKenna et al., 2010; Van der Auwera et al., 2013), beginning with alignment using BWA-0.7.5a (Li & Durbin, 2009) and clean up using Picard Tools to mark adapter sequences and duplicates. 
+
+Aligned to 2 recently published reference genomes 
+Mexican howler monkey, Alouatta palliata mexicana (GenBank GCA_004027835.1; Genereux et al., 2020).
+Ateles geoffroyi (black-handed spider monkey) - https://www.ncbi.nlm.nih.gov/assembly/GCA_004024785.1
+
+Ran picard FastqToSam (step1_ubam.sh) then moved bams to /work/klk37/howler_data/bams, then ran step2_adapters.sh to mark adapters. 
+Indexed reference genomes and made picard sequence dictionary for both Alouatta and Ateles (prep_reference_index_files.sh) 
+Started running BWA-MEM alignments for each set of reads to both Alouatta and Ateles (step3_bwamem_AloPal.sh and step3_bwamem_AteGeo.sh)
+The cleaned BAM alignments will be provided to GATK v4.1.1.0 HaplotypeCaller for pre-calling SNPs and INDELs before jointly genotyping all samples using GenotypeGVCFs. 
+Variants will be filtered using GATK’s hard filtering recommendations as a baseline, adjusted according to the distributions of called variant annotations.
