@@ -4,7 +4,7 @@ cd /work/klk37/howler_data/bams
 BAMs=*merged.bam
 for BAM in $BAMs
 do
-	name="$(echo ${BAM} | grep -oP '.*(?=_piped.bam)')"
+	name="$(echo ${BAM} | grep -oP '.*(?=_merged.bam)')"
 	echo "working on $name"
 	OUT="$name"_dedup.bam
 	MET="$name"_dedup_metrics.txt
